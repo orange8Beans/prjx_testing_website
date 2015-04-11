@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Mini Game</title>
+        <!-- Bootstrap -->
+        <!-- MyOwnStyle -->
+        <style type="text/css">
+            .check {
+                width: 80px;
+                height: 80px;
+                float: left;
+            }
+            .dragImg {
+                width: 80px;
+                height: 80px;
+                cursor: pointer;
+                float: left;
+            }
+            .container{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 480px;
+                height: 640px;
+                margin: -290px 0 0 35px;
+                border:1px solid black;
+                background-color:grey;
+            }
+            .container2{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 480px;
+                height: 640px;
+                margin: -290px 0 0 -525px;
+                border:1px solid black;
+                background-color:grey;
+            }
+            .show
+            {
+                visibility: visible;
+            }
+            .hide
+            {
+                visibility: hidden;
+            }
+            .levelBtn
+            {
+                background-color:deepskyblue;
+                font-size:1em;
+                color:lightgoldenrodyellow;
+                position: static;
+            }
+            .numSmall
+            {
+                font-size:1.5em;
+                color: deepskyblue;
+            }
+            .numTen
+            {
+                font-size:1.5em;
+                color: blueviolet;
+            }
+            .numHund
+            {
+                font-size:1.5em;
+                color: hotpink;
+            }
+            .numThou
+            {
+                font-size:1.5em;
+                color: red;
+            }
+        </style>
+        <script src="js/jquery-2.1.1.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="js/miniGame.js"></script>
+    </head>
+    <body>
+        <script>
+            var leftOffset = 560;
+            var levelReward;
+            $( function() {
+                $("#levelPanel").hide();
+                // Make the Img Elements draggable
+                $(".dragImg").draggable({
+                    containment: "#playGround",
+                    scroll: false,
+                    cursor: "pointer",      // Change cursor type
+                    snap: true,             // Enable Snap (can use snap:"#drag6")
+                    snapMode: "outter",     // snapMode: choose "inner" "outter" "both"
+                    snapTolerance: 20,      // Put Snap Tolerance
+                    opacity: 0.50,           // Set Opacity while dragging
+                    grid: [ 80, 80 ]
+                });
+                // When Start button is clicked
+                $("#startButton").click( function() {
+                    // Let the user to select the levels
+                    $("#levelPanel").slideToggle("slow");
+                    $("#waitingGround").empty();
+
+                    // Test of some HTTP functions
+                    //$("#message2").load("demo_test.html #p1");  // Using AJAX to load data from Server and put into the selected elements
+                    //$.get("demo_test.html",function(data,status){
+                    //    alert("Data: " + data + "\nStatus: " + status);
+                    //});
+                    /*$.post("demo_test_post.asp",              // Post and Get need Server side to support!!!
+                            {
+                                name:"Donald Duck",
+                                city:"Duckburg"
+                            },
+                            function(data,status){
+                                alert("Data: " + data + "\nStatus: " + status);
+                            });*/
+                });
+                // When different level is selected
+                // Level One
+                $("#levelOne").click( function() {
+                    $("#levelPanel").slideUp("slow");
+                    // Start Playing Game, level-1
+                    playGame(level_Src[0]);
+                    levelReward = level_Reward[0];
+                });
+                // Level Two
+                $("#levelTwo").click( function() {
+                    $("#levelPanel").slideUp("slow");
+                    // Start Playing Game, level-2
+                    playGame(level_Src[1]);
+                    levelReward = level_Reward[1];
+                });
+                // Level Three
+                $("#levelThree").click( function() {
+                    $("#levelPanel").slideUp("slow");
+                    // Start Playing Game, level-3
+                    playGame(level_Src[2]);
+                    levelReward = level_Reward[2];
+                });
+                // Level Four
+                $("#levelFour").click( function() {
+                    $("#levelPanel").slideUp("slow");
+                    // Start Playing Game, level-4
+                    playGame(level_Src[3]);
+                    levelReward = level_Reward[3];
+                });
+                // Level Five
+                $("#levelFive").click( function() {
+                    $("#levelPanel").slideUp("slow");
+                    // Start Playing Game, level-5
+                    playGame(level_Src[4]);
+                    levelReward = level_Reward[4];
+                });
+                // Set timer count
+
+                // Check Winning Situation
+                $("#finishButton").click(function(){
+                    //$("#message2").text(" " + Math.round($("#IMG0").offset().top) + " " +  Math.round(oriPos[0].top));
+                    //$("#message2").text(" " + Math.round($("#IMG0").offset().left) + " " +  Math.round(oriPos[0].left));
+                    var topDiffer, leftDiffer;
+                    for(var i= 0; i<48; i++)
+                    {
+                        topDiffer = Math.abs( Math.round( $("#"+"IMG" + i).offset().top) - Math.round(oriPos[i].top) );
+                        leftDiffer = Math.abs( Math.round( $("#"+"IMG" + i).offset().left) - Math.round(oriPos[i].left + leftOffset) );
+                        //if( Math.round( $("#"+"IMG" + i).offset().top) !==  Math.round(oriPos[i].top) )
+                        if( topDiffer >= 10)
+                        {
+                            checkFlag = false;
+                            break;
+                        }
+                        //if(Math.round( $("#"+"IMG" + i).offset().left) !==  Math.round(oriPos[i].left) + 525 )
+                        if( leftDiffer >= 10)
+                        {
+                            checkFlag = false;
+                            break;
+                        }
+                    }
+                    if(checkFlag === true)
+                    {
+                        $("#message").html("<b style='color:green;font-size:1.5em;'>You Win!</b> " +
+                                "As a <strong style='color:deepskyblue;font-size:1.5em;'> reward</strong>, " +
+                                "<strong style='color:orangered;font-size:1.25em;'>Orange</strong> " +
+                                "will <strong style='color:deeppink;font-size:1.5em;'>Kiss</strong> " +
+                                "<strong style='color:lawngreen;font-size:1.25em;'>Apple</strong> for " +
+                                "<strong>" + levelReward + "</strong> times " +
+                                "<strong style='color:orangered;font-size:1.8em;'>╭(╯3╰)╮</strong>");
+                    }
+                    else
+                    {
+                        $("#message").html("<b style='color:red;font-size:1.5em;'>Not Yet!</b>");
+                    }
+                    checkFlag = true;
+                });
+            });
+            // Playing Game
+            function playGame (levelSelected){
+                // Clear previous created elements first
+                $("#message").html("<b style='color:dodgerblue;font-size:1.5em;'>"+ levelSelected.toUpperCase() +" Started!</b>");
+                // Call the function to create Img Elements
+                createImg(noElements,levelSelected,"waitingGround");
+                //createCheck(noElements,"playGround");     // Put Check Elements
+                // Activate the palyGround
+                setTimeout(function() {         // setTimeout is to set delay function
+                    $("#playGround").css("backgroundColor","lightGreen")
+                }, 500);
+                setTimeout(function(){
+                    shuffle(randPos);
+                    rePostion(levelSelected);
+                    $("#finishButton").removeClass("hide");
+                }, 1500);
+                // Enabel Img Elements draggable again
+                $(".dragImg").draggable({
+                    containment: "#playGround",
+                    scroll: false,
+                    cursor: "pointer",      // Change cursor type
+                    snap: true,             // Enable Snap (can use snap:"#drag6")
+                    snapMode: "outter",     // snapMode: choose "inner" "outter" "both"
+                    snapTolerance: 20,      // Put Snap Tolerance
+                    opacity: 0.50,           // Set Opacity while dragging
+                    grid: [ 80, 80 ]
+                });
+            }
+        </script>
+        <div>
+            <p id="message"></p>
+            <div id="message2"></div>
+            <br>
+        </div>
+        <div id="controlPanel">
+            <input id="startButton" type="button" value="选择关卡" style="background-color:deepskyblue;font-size:1.5em;color:lightgoldenrodyellow;">
+            <input id="finishButton" type="button" value="完成点击" class="hide" style="background-color:deepskyblue;font-size:1.5em;color:lightgoldenrodyellow;">
+            <div id="levelPanel" style="height: 150px;width: 75px;background-color: papayawhip;">
+                <input id="levelOne" type = "button" value="Level-1" class="levelBtn">
+                <input id="levelTwo" type = "button" value="Level-2" class="levelBtn">
+                <input id="levelThree" type = "button" value="Level-3" class="levelBtn">
+                <input id="levelFour" type = "button" value="Level-4" class="levelBtn">
+                <input id="levelFive" type = "button" value="Level-5" class="levelBtn">
+            </div>
+        </div>
+        <div id="playGround" class="container" onchange="myFunction()">
+        </div>
+        <div id="waitingGround" class="container2">
+        </div>
+        <div id="playGround3" class="dragImg">
+        </div>
+    </body>
+</html>
