@@ -88,8 +88,8 @@ routes.configRoutes( app, server, mySerialPort );
 
 // ----------------- BEGIN START SERVER -------------------
 server.listen( portConfig.port_num );
-console.log(
-  'Express server listening on port %d in %s model',
+//console.log(
+//  'Express server listening on port %d in %s model',
 //  server.address().port, app.settings.env
-);
+//);
 // ================== END START SERVER ====================
