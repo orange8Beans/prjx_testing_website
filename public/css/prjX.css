@@ -1,0 +1,11 @@
+.module-closer {
+  width: 1.5em;
+  border: 1px solid grey;
+  position: absolute;
+  padding: 0;
+  top: 0;
+  right: 0;
+}
+  .module-closer:hover {
+    background : rgba(222, 38, 69, 0.91);
+  }

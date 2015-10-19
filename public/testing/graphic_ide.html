@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- Graphic_IDE module complete html-->
+<!-- V0.11 -->
+<!-- Modify and verify on this page first before translate it into modular htmls-->
+<html>
+<head>
+  <!-- The content in <head>...</head> -->
+  <meta charset="utf-8">
+  <title>ProjectX: Graphic_IDE_V0.11</title>
+  <script src="blockly/blockly_compressed.js"></script>
+  <script src="blockly/blocks_compressed.js"></script>
+  <script src="blockly/msg/js/en.js"></script>
+  <script src="blockly/javascript_compressed.js"></script>
+  <!-- our stylesheets -->
+  <link rel="stylesheet" href="../css/graphic_ide.css" type="text/css"/>
+</head>
+<!-- The content in <body>...</body> -->
+<!-- graphic_ide_module_v0.10 -->
+<!-- load this template module to use the graphic_ide -->>
+<body>
+<div class="graphic_ide_command_pannel">
+  <h1>
+    PrjX: Graphic_IDE_V0.10
+  </h1>
+
+  <div>
+    <p>
+      <button onclick="showCode()" class="graphic_ide_buttons">Generate JS Code</button>
+      <!-- <button onclick="runCode()" class="buttons">Run JavaScript</button> -->
+    </p>
+  </div>
+
+  <!-- Container box for blockly elements -->
+  <div id="blocklyDiv"></div>
+</div>
+
+<xml id="toolbox" style="display: none">
+  <block type="controls_if"></block>
+  <block type="logic_compare"></block>
+  <block type="controls_repeat_ext"></block>
+  <block type="math_number"></block>
+  <block type="math_arithmetic"></block>
+  <block type="text"></block>
+  <block type="text_print"></block>
+</xml>
+
+<script>
+  Blockly.inject(document.getElementById('blocklyDiv'),
+      {toolbox: document.getElementById('toolbox')});
+
+  function showCode() {
+    // Generate JavaScript code and display it.
+    Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+    var code = Blockly.JavaScript.workspaceToCode();
+    alert(code);
+  }
+</script>
+</body>
+</html>

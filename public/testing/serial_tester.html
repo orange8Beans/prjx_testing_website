@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- ie9+ rendering support for latest standards -->
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+  <!-- our stylesheets -->
+  <link rel="stylesheet" href="css/serial_tester.css" type="text/css"/>
+
+  <!-- third-party javascript -->
+  <script src="js/jq/jquery-2.1.1.min.js"></script>
+  <script src="js/jq/jquery.uriAnchor.js"></script>
+</head>
+<body>
+<script>
+  $(function () {
+    // 'Enter' Key Function
+    $("#channel").keyup(function (e) {
+      if (e.keyCode == 13) {
+        // Do something
+        getData('channel');
+      }
+    });
+
+    // Toggle to listen to device reply
+    $("#configure-button").click(function () {
+      if ($("#configure-text").text() === "Device Reply Disabled") {
+        $("#configure-text").text("Device Reply Enabled");
+      }
+      else {
+        $("#configure-text").text("Device Reply Disabled");
+      }
+    });
+
+  });
+
+  <!-- Running javascripts -->
+  // Get data from element
+  function getData(channelId) {
+    var channelText = document.getElementById(channelId).value;
+    //var replySwitch = document.getElementById('configure-text').innerText;
+    var replySwitch = $("#configure-text").text();
+    // make a HTTP GET request:
+    var request = new XMLHttpRequest();
+    // GET /analog/channelNum, and make an asynchronous request:
+    request.open("GET", '/analog/' + channelText + ">>" + replySwitch, true);
+    //testValue.innerText = channelText;
+    // close the request:
+    request.send(null);
+    // when the request gets a response, call showSensorValue with the result:
+    request.onreadystatechange = function () {
+      showSensorValue(request.responseText);
+    }
+  }
+
+  function showSensorValue(response) {
+    // set the sensorValue span's text
+    // using the response you get from the server:
+    sensorValue.innerHTML = response;
+  }
+</script>
+<!-- command-pannel -->
+<div class="serial_tester_command_pannel">
+  <h1>PrjX: Server_SerialTester_V0.11:</h1>
+  <input type="submit" value="Talk to Device" onclick="getData('channel');" class="serial_tester_buttons">
+  <textarea id="channel">
+  </textarea>
+  <div id="display">
+    <span id="sensorValue" class="codeLine"></span><br>
+
+    <p id="testValue"></p><br>
+  </div>
+
+  <div class="serial_tester_configure_pannel">
+    <h1>Configurations:</h1>
+    <input id="configure-button" type="button" value="Reply Switch" class="serial_tester_buttons">
+
+    <p id="configure-text" style="font-size:1.25em;font-weight:bold">Device Reply Disabled</p>
+  </div>
+
+</div>
+</body>
+</html>

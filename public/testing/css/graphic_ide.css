@@ -1,0 +1,57 @@
+/*
+ * graphic_ide.css
+ * V0.11
+ * Root namespace styles
+ */
+/** End standard selectors */
+.graphic_ide_buttons {
+  font-size: 2em;
+}
+
+input {
+  font-size : 2em;
+}
+
+.codeLine {
+  font-size   : 2em;
+  font-family : Consolas;
+}
+
+.graphic_ide_title {
+  border-radius : 3px;
+  font-size     : 140%;
+  z-index       : 2;
+}
+
+/** Boxes */
+.graphic_ide_command_pannel {
+  position      : absolute;
+  padding       : 0px;
+  margin-top    : 0px;
+  margin-left   : 0px;
+  top           : 10%;
+  left          : 50%;
+  width         : 510px;
+  height        : 640px;
+  background    : #fff;
+  background-color    : lightgrey;
+  border-radius : 3px;
+  z-index       : 2;
+}
+
+.graphic_ide_configure_pannel {
+  position         : absolute;
+  margin-top       : 10px;
+  margin-left      : 0px;
+  width            : 200px;
+  height           : 105px;
+  background-color : slategray;
+  border-radius    : 3px;
+}
+
+#blocklyDiv {
+  height: 480px;
+  width: 510px;
+}
+
+

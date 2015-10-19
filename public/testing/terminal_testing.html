@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PrjX_Terminal_V0.1</title>
+  <link rel="stylesheet" type="text/css" href="css/terminal.css"/>
+  <script src="js/jq/jquery-2.1.1.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+
+  <script src="js/prjxx.js"></script>
+  <script src="js/core/utils.js"></script>
+  <script src="js/core/terminal.js"></script>
+
+  <script>
+    $(function () {
+      prjXX.initModule();
+      prjXX.Core.Terminal.grabSerialPort();
+
+      // 'Enter' Key Function
+      $('#terminalfocus').on('keyup', function(e) {
+        alert('key up' + e.keyCode);
+        if (e.keyCode == 13) {
+          console.log(prjXX.Core.Terminal.getEnterText.grabEnterText());
+        }
+
+      });
+
+      $("#terminalfocus").keypress(function (e) {
+        e.preventDefault();
+        var ch = String.fromCharCode(e.which);
+        console.log(e.keyCode);
+      })
+    });
+  </script>
+
+</head>
+<body>
+<!--<canvas id="can" width="1024" height="256" style="position:absolute;left:0px;right:0px;top:0px;height:256px;"></canvas>
+<div class="editor--terminal" style="position:absolute;left:0px;right:0px;top:256px;bottom:0px;">-->
+<div class="editor--terminal" style="position:absolute;left:0px;right:0px;top:0px;bottom:0px;">
+  <div class="editor__canvas">
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+/*
+ * nodeServer.css
+ * Root namespace styles
+ */
+/** Begin reset */
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin-bottom: 6pt;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+ol, ul, dl {
+  list-style-position: inside;
+}
+/** End reset */
+
+/** Begin standard selectors */
+body {
+  font: 10pt 'Trebuchet MS', Verdana, Helvetica, Arial, sans-serif;
+  color: darkblue;
+  background-color: aliceblue;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link, a:visited {
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+strong {
+  font-weight: 800;
+  color: #000;
+}
+/** End standard selectors */
+
+
+/** Container */
+#container_overall {
+  position      : absolute;
+  top			: 50%;
+  left          : 50%;
+  margin-top    : -384px;
+  margin-left   : -512px;
+  width         : 1024px;
+  height        : 768px;
+  background-color: lightskyblue;
+}
+

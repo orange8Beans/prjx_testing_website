@@ -16,9 +16,6 @@
   <link rel="stylesheet" href="rs/bootstrap-3.3.4/css/bootstrap.min.css">
   <link rel="stylesheet" href="rs/Flat-UI-master/docs/assets/css/demo.css">
   -->
-  <!-- v100 terminal -->
-  <link rel="stylesheet" href="rs/v100-terminal/css/v100-terminal.css">
-
   <!-- Flat-UI -->
 
   <link rel="stylesheet" href="rs/Flat-UI-master/dist/css/vendor/bootstrap.min.css">
@@ -53,11 +50,6 @@
   <script src="rs/Flat-UI-master/dist/js/vendor/video.js"></script>
   <script src="rs/Flat-UI-master/docs/assets/js/application.js"></script>
 
-  <!-- v100 termianl -->
-  <script src="rs/v100-terminal/js/v100.js"></script>
-  <script src="rs/v100-terminal/js/utils.js"></script>
-  <script src="rs/v100-terminal/js/terminal.js"></script>
-
   <!-- our javascript -->
   <script src="js/prjX.js" ></script>
   <script src="js/prjX.util.js"></script>
@@ -69,24 +61,9 @@
   <script src="js/prjX.testmodule.js"></script>
   <script src="js/prjX.device.js"></script>
 
-  <script src="js/prjX.vcmd.js"></script>
-  <script src="js/prjX.language_engine.js"></script>
-
-  <script type="text/javascript">
+  <script>
     $(function () {
-      javacalljs = function () {
-        document.getElementById("prjx").innerHTML +=
-        "<br\>java???js??";
-      };
-      prjX.BTN_Simulate = null;
       prjX.initModule( $('#prjx') );
-      // 'Enter' Key Function
-      $("#stage_terminal").on('keyup', function (e) {
-        if (e.which === 13) {
-          // Do something
-          console.log(v100.Terminal.getEnterText());
-        }
-      });
     });
   </script>
 </head>
@@ -95,9 +72,8 @@
   <div class="container">
     <div class="demo-headline">
       <h1 class="demo-logo">
-        <!--<span style="color:#34495E">PrjX</span>-<span style="color:#48C9B0">Beans</span>
-        <small>Let your imagination fly</small>-->
-        <img src="rs/Logo8.png" alt="logo" style="width:510px;height:228px;">
+        <span style="color:#34495E">PrjX</span>-<span style="color:#48C9B0">Beans</span>
+        <small>Let your imagination fly</small>
       </h1>
     </div>
   </div><!-- /demo-headline -->
@@ -125,7 +101,6 @@
             <ul>
               <li>Everything you need to build anything you want</li>
             Go to: <a href="http://prjxbeans.com" target="_blank">PrjXBeans.com</a>
-            </ul>
           </div>
         </div>
       </div>

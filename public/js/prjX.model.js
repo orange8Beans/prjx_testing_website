@@ -46,9 +46,10 @@ prjX.model = (function () {
     var
       update_color;
 
-    update_color = function ( rgb_color ) {
+    update_color = function ( cmd ) {
       if( sio ) {
-        sio.emit( 'updatecolor', rgb_color );
+        console.log([cmd.tgt, cmd.cmd, cmd.lod]);
+        sio.emit('updatecolor', cmd);
       }
     };
 

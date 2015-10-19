@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- ie9+ rendering support for latest standards -->
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+  <!-- jQuery libraries -->
+  <script src="js/jq/jquery-2.1.1.min.js"></script>
+  <script src="js/jq/jquery.uriAnchor.js"></script>
+
+  <!-- blockly libraries -->
+  <!-- these libraries are needed for Graphic_IDE -->
+  <script src="blockly/blockly_compressed.js"></script>
+  <script src="blockly/blocks_compressed.js"></script>
+  <script src="blockly/msg/js/en.js"></script>
+  <script src="blockly/javascript_compressed.js"></script>
+
+  <!-- our stylesheets -->
+  <link rel="stylesheet" href="css/nodeserver.css" type="text/css"/>
+  <link rel="stylesheet" href="css/serial_tester.css" type="text/css"/>
+  <link rel="stylesheet" href="/css/graphic_ide.css" type="text/css"/>
+</head>
+<body>
+<script>
+  $(function () {
+    // Load external html content into this page
+    $("#serialTester_Module").load("serial_tester_content.html");
+    $("#graphicIDE_Module").load("graphic_ide_content.html");
+  });
+
+  // Generate javaScript code and display it.
+  function sendToDevice() {
+    Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+    var code = Blockly.JavaScript.workspaceToCode();
+    //alert(code);
+    //$("#testDis").text(code);
+    sendHttpGetData(code);
+  }
+
+  <!-- Server send data to device -->
+  // Make a Http Get request and send data.
+  function sendHttpGetData(data_to_send) {
+    var replySwitch = $("#configure-text").text();
+    // make a HTTP GET request:
+    var request = new XMLHttpRequest();
+    // GET /analog/channelNum, and make an asynchronous request:
+    request.open("GET", '/analog/' + data_to_send + ">>" + replySwitch, true);
+    // close the request:
+    request.send(null);
+    // when the request gets a response, call showSensorValue with the result:
+    request.onreadystatechange = function () {
+      showSensorValue(request.responseText);
+    }
+  }
+</script>
+<!-- Overall container -->
+<div id="container_overall">
+  <button onclick="sendToDevice()" class="buttons" style="font-size: 2em">Send to Device</button>
+  <p id="testDis">Click to send generated JS code to device</p>
+  <div id="serialTester_Module"></div>
+  <div id="graphicIDE_Module"></div>
+  <!--
+  <iframe src="graphic_ide.html" width="640" height="640"></iframe>
+  -->
+  <div style="position:relative;width:300;margin-top: 650px;margin-left: 5px">
+    <a href="serial_tester.html" style="background-color:lightgoldenrodyellow;font-size: 2em">Go to Serial Tester Page.</a>
+  </div>
+  <div style="position:relative;width:300;margin-top:-30px;margin-left: 512px">
+    <a href="graphic_ide.html" style="background-color:lightgoldenrodyellow;font-size: 2em">Go to Graphic IDE Page.</a>
+  </div>
+</div>
+</body>
+</html>
